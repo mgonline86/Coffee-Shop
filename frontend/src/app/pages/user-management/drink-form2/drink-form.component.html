@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="isNew">New Barista Creator</ion-title>
+    <ion-title *ngIf="!isNew">Barista Editor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="drink">
+
+    <form (ngSubmit)="logForm()">
+      <ion-item>
+        <ion-label>Barista Nickname:</ion-label>
+        <ion-input type="text" [(ngModel)]="drink.nickname" name="nickname"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Barista Email:</ion-label>
+        <ion-input type="text" [(ngModel)]="drink.email" name="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Barista Password:</ion-label>
+        <ion-input type="password" [(ngModel)]="drink.password" name="password"></ion-input>
+      </ion-item>
+
+      <ion-button 
+        [disabled]="!auth.can('get:barista')"
+        (click)="deleteClicked()">Delete</ion-button><br />
+      <ion-button (click)="closeModal()">Cancel</ion-button>
+      <ion-button 
+        [disabled]="!auth.can('get:barista')"
+        (click)="saveClicked()">Save</ion-button>
+
+    </form>
+</ion-content>
